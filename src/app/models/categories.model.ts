@@ -1,8 +1,8 @@
 export interface Categories {
-     id: number; 
-     categoryName: string; 
-     description: string;
+     Id: number; 
+     CategoryName: string; 
+     Description: string;
      Level: number;
-     parentLevel: number; 
-     createdBy: string;
+     ParentLevel: number; 
+     CreatedBy: string;
 }

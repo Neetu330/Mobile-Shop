@@ -1,0 +1,53 @@
+<div class="container mx-auto d-flex">
+    <div class="row">
+        <div class="pen-title">
+            <h1>Create Form</h1>
+        </div>
+        <!-- Form Module-->
+        <div class="module form-module col-md-9 mx-auto">
+            <div class="row">
+                <div class="form">
+                    <form [formGroup]="createCategories">
+                        <div class="row">
+                            <div class="inputBlock col-sm-6">
+                                <input formControlName="categoryName" type="text" placeholder="Category Name" />
+                                <span class="errorText"
+                                    *ngIf="this.createCategories.controls.categoryName.errors!=null && submitted">Please
+                                    enter user
+                                    name</span>
+                            </div>
+                            <div class="inputBlock col-sm-6">
+                                <input formControlName="description" type="text" placeholder="Description" />
+                                <span class="errorText"
+                                    *ngIf="this.createCategories.controls.description.errors!=null && submitted">Please
+                                    enter
+                                    password</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="inputBlock col-sm-6">
+                                <input formControlName="level" type="text" placeholder="Level" />
+                                <span class="errorText"
+                                    *ngIf="this.createCategories.controls.level.errors!=null && submitted">Please
+                                    enter user
+                                    name</span>
+                            </div>
+                            <div class="inputBlock col-sm-6">
+                                <input formControlName="parentLevel" type="text" placeholder="Parent Level" />
+                                <span class="errorText"
+                                    *ngIf="this.createCategories.controls.parentLevel.errors!=null && submitted">Please
+                                    enter
+                                    password</span>
+                            </div>
+                        </div>
+                        <div class="buttonBlock">
+                            <button (click)="onBackClick()">Back</button>
+                            <button *ngIf="!editEnable" (click)="onSubmit()">Create</button>
+                            <button *ngIf="editEnable" (click)="onEditSubmit()">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

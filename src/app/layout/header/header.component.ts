@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { UserService } from '../service/user.service';
 import { Router } from '@angular/router';
+import { MasterService } from 'src/app/services/master.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,14 +11,28 @@ export class HeaderComponent implements OnInit {
   customerData: any = {};
   sidebarnav: boolean = false;
   userName: String = "";
-  // constructor(private userService: UserService, private router: Router) { }
+  updatedMenuList: any = [];
+  menuList = [
+    { active_icon: 'dashboard-active', label: 'Dashboard', link: '/Dashboard', active: true, isRequired: true },
+    { active_icon: 'category-active', label: 'Category', link: '/Category', active: true, isRequired: true },
+    { active_icon: 'inventories-active', label: 'Inventories', link: '/Inventories', active: true, isRequired: true },
+    { active_icon: 'users-active', label: 'Users', link: '/Users', active: true, isRequired: true },
+    { active_icon: 'orders-active', label: 'Orders', link: '/Orders', active: true, isRequired: true },
+  ]
+  constructor(private masterService: MasterService, private route: Router,) { }
 
 
   ngOnInit() {
-    // this.getAllCustomers();
-    // this.userName = localStorage.getItem('userData') ? JSON.parse(localStorage.getItem('userData')).first_name : '';
+    this.userName = this.masterService.loggedInUserName;
+    this.menuList.forEach(menu => {
+      if (this.masterService.menuList.some((urlAllowed: { name: string; }) => urlAllowed.name === menu.label)) {
+        menu.isRequired = true;
+      } else {
+        menu.isRequired = false;
+      }
+    });
+    this.updatedMenuList = this.menuList;
   }
-
 
   Opensidebar() {
     this.sidebarnav = true;
@@ -29,18 +43,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    // this, this.userService.logout().subscribe((res: any) => {
-    //   if (res.value) {
-    //     this.router.navigate(['/login']);
-    //   }
-    // });
+    sessionStorage.removeItem('LoggedInStatus');
+    this.route.navigateByUrl('/login');
   }
-
-  // getAllCustomers() {
-  //   this.userService.getAllCustomers().subscribe((res: any) => {
-  //     this.customers = res.data;
-  //   });
-
-  // }
 
 }

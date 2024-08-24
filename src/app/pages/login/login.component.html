@@ -10,10 +10,10 @@
                     <form [formGroup]="loginDetails">
                         <img src="../assets/images/user.png" alt="">
                         <div class="inputBlock">
-                            <input formControlName="username" type="text" placeholder="Username" />
+                            <input formControlName="username" type="text" placeholder="Username" (blur)="usernameCheck()" (keyup)="usernamekeyup($event)"/>
                             <span class="errorText"
-                                *ngIf="this.loginDetails.controls.username.errors!=null && submitted">Please enter user
-                                name</span>
+                                *ngIf="this.loginDetails.controls.username.errors!=null && submitted || this.loginDetails.controls.username.errors!=null && emailInv">Please enter user
+                                name </span>
                         </div>
                         <div class="inputBlock">
                             <input formControlName="password" type="password" placeholder="Password" />
