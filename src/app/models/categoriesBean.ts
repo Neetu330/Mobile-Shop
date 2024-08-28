@@ -31,3 +31,10 @@ export class UserDetails {
     CreatedBy : string | undefined;
     PAN : string | undefined;
 }
+
+export class userDoc {
+    Id: number | undefined;
+    DocId : number | undefined;
+    DocPath : string | undefined;
+    CreatedBy : string | undefined;
+}

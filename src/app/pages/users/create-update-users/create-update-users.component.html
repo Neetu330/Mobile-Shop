@@ -78,7 +78,21 @@
 
             <!-- ----------------Step 2--------------- -->
             <div class="form" *ngIf="step2">
-                <form [formGroup]="userDetails">
+                <form [formGroup]="docDetails">
+                    <div class="inputBlock col-sm-6">
+                        <label for="dropdown">Choose an option:</label>
+                        <select id="dropdown" formControlName="docType">
+                            <option value="" disabled selected>Select</option>
+                            <option *ngFor="let option of options" [value]="option.value">
+                                {{ option.label }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="inputBlock col-sm-6">
+                        <label for="fileInput">Select JPG and PDF files:</label>
+                        <input type="file" id="fileInput" (change)="onFileSelected($event)"
+                            accept=".jpg,.jpeg,.pdf">
+                    </div>
                     <div class="buttonBlock">
                         <!-- <button (click)="onBackClick()">Back</button> -->
                         <button *ngIf="!editEnable" (click)="submitStep2()">Create</button>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MasterService } from 'src/app/services/master.service';
 import { Router } from '@angular/router';
-import { UserDetails } from 'src/app/models/categoriesBean';
+import { UserDetails, userDoc } from 'src/app/models/categoriesBean';
 import * as $ from 'jquery';
 
 @Component({
@@ -11,17 +11,23 @@ import * as $ from 'jquery';
   styleUrls: ['./create-update-users.component.less']
 })
 export class CreateUpdateUsersComponent implements OnInit {
-  sectionTitle : any;
-  
+  sectionTitle: any;
+
   userDetails: FormGroup;
-  addressDetails: FormGroup;
+  docDetails: FormGroup;
   submitted: boolean = false;
   id: any;
   editEnable = false;
   userDetailsBean: UserDetails = new UserDetails();
-  step1: boolean = true;
-  step2: boolean = false;
+  userDoc: userDoc = new userDoc();
+  step1: boolean = false;
+  step2: boolean = true;
   step3: boolean = false;
+  options = [
+    { value: '1', label: 'PAN Card' },
+    { value: '2', label: 'Aadhar Card' }
+  ];
+  selectedFile: any;
 
   constructor(private fb: FormBuilder, private masterService: MasterService, private route: Router) {
     this.userDetails = this.fb.group({
@@ -35,12 +41,9 @@ export class CreateUpdateUsersComponent implements OnInit {
       pan: ["", [Validators.required]],
     })
 
-    this.addressDetails = this.fb.group({
-      address: ["", [Validators.required]],
-      mobile: ["", [Validators.required]],
-      email: ["", [Validators.required]],
-      pan: ["", [Validators.required]],
-      roleId: ["", [Validators.required]],
+    this.docDetails = this.fb.group({
+      docType: ["", [Validators.required]],
+      // docName: ["", [Validators.required]],
     })
 
     if (history.state.id != null || history.state.id != undefined) {
@@ -59,7 +62,7 @@ export class CreateUpdateUsersComponent implements OnInit {
     this.route.navigateByUrl('/Inventories')
   }
 
-  submit(){
+  submit() {
     this.submitted = true;
     if (this.userDetails.invalid) {
       return;
@@ -80,29 +83,24 @@ export class CreateUpdateUsersComponent implements OnInit {
     })
   }
 
-  edit(){
+  edit() {
 
   }
 
-  submitStep2(){
-    this.submitted = true;
-    if (this.addressDetails.invalid) {
-      return;
-    }
-    this.userDetailsBean = this.addressDetails.value;
-    this.userDetailsBean.CreatedBy = 'samrutti@gmail.com'
-    this.masterService.addressDetails(this.userDetailsBean).subscribe((res: any) => {
+  submitStep2() {
+    // this.docDetails.controls.docName.setValue(this.selectedFile);
+    console.log("------------>  ", this.docDetails.value);
+    
+    this.userDoc = this.docDetails.value;
+    this.userDoc.CreatedBy = 'samrutti@gmail.com';
+    this.masterService.addUserDocs(this.docDetails.value, this.selectedFile).subscribe((res: any) => {
       console.log(res);
-      if (res == '1') {
-        this.step1 = false;
-        this.step2 = false;
-        this.step3 = true
-        this.submitted = false;
-        this.sectionTitle = "Upload Documents";
-        $('#step3').toggleClass('active');
-      } else {
-        console.log("failure -1 ---------------------------")
-      }
-    })
+    });
+  }
+
+  onFileSelected(event: any) {
+    console.log(event);
+    console.log(event.target.files[0]);
+    this.selectedFile = event.target.files[0];
   }
 }

@@ -4,9 +4,11 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CategoriesBean } from '../models/categoriesBean';
 import { Categories } from '../models/categories.model';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class MasterService {
 
   apiURL: string | undefined;
@@ -94,19 +96,23 @@ export class MasterService {
     }
     return this.http.get(this.apiURL);
   }
+
   addUserDetails(userDetails: any): Observable<any> {
     this.apiURL = this.usersApiApplicationURL + 'AddUsers';
     return this.http.put(this.apiURL, userDetails);
   }
 
-  addressDetails(addressDetails: any): Observable<any> {
-    this.apiURL = this.usersApiApplicationURL + 'AddUserDetails';
-    return this.http.put(this.apiURL, addressDetails);
-  }
+  // addressDetails(addressDetails: any): Observable<any> {
+  //   this.apiURL = this.usersApiApplicationURL + 'AddUserDetails';
+  //   return this.http.put(this.apiURL, addressDetails);
+  // }
 
-  addUserDocs(category: any): Observable<any> {
+  addUserDocs(docDetails: any, fileName : any): Observable<any> {
+    let formdata : FormData = new FormData();
+    formdata.append("file", fileName);
+    formdata.append("details",JSON.stringify(docDetails));
     this.apiURL = this.usersApiApplicationURL + 'AddUserDocs';
-    return this.http.put(this.apiURL, category);
+    return this.http.put(this.apiURL, formdata);
   }
 
   editUserDocs(category: any): Observable<Boolean> {

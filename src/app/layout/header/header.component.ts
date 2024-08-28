@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
       if (this.masterService.menuList.some((urlAllowed: { name: string; }) => urlAllowed.name === menu.label)) {
         menu.isRequired = true;
       } else {
-        menu.isRequired = false;
+        // menu.isRequired = false;
       }
     });
     this.updatedMenuList = this.menuList;
