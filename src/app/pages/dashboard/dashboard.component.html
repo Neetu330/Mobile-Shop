@@ -1,1 +1,106 @@
-Dashboard
+<div class="container-fluid top-info-boxes">
+    <div class="row">
+        <div class="col-3">
+            <div class="top-boxes">
+                <div class="count">200</div>
+                <div class="title">Customers</div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="top-boxes">
+                <div class="count">200</div>
+                <div class="title">Customers</div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="top-boxes">
+                <div class="count">200</div>
+                <div class="title">Customers</div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="top-boxes">
+                <div class="count">200</div>
+                <div class="title">Customers</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+       
+        <div class="col-lg-6 best-selling-table global-table-style">
+            <div class="table-heading">
+                <h2>EMI remider</h2>
+            </div>
+            <div class="table-content">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>comming EMI date</th>
+                            <th>Product Name</th>
+                            <th>Emi price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let custemi of customeremiremider">
+                            <td>{{ custemi.name }}</td>
+                            <td>{{ custemi.dtemi }}</td>
+                            <td>{{ custemi.product }}</td>
+                            <td>{{ custemi.emiamount }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6 best-offers-table global-table-style">
+            <div class="table-heading">
+                <h2>Best offers</h2>
+            </div>
+
+            <div class="table-content">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Offer Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let offer of bestoffer">
+                            <td>{{ offer.name }}</td>
+                            <td>{{ offer.dtstart }}</td>
+                            <td>{{ offer.dtend }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-12 best-selling-table global-table-style">
+            <div class="table-heading">
+                <h2>Best Selling Products</h2>
+            </div>
+            <div class="table-content">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of bestproduct">
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.qty }}</td>
+                            <td>{{ product.price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
