@@ -1,15 +1,17 @@
 <div>
     <div>
-        <button (click)="create()">Create</button>
+        <button *ngIf="allowedActions?.isAdd" (click)="create()">Create</button>
     </div>
     <div class="categorylistBlock">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Category Name</th>
                     <th>Description</th>
                     <th>Created Date</th>
-                    <th>Action</th>
+                    <th>Level</th>
+                    <th>Parent Level</th>
+                    <th  *ngIf="allowedActions.isEdit || allowedActions.isDelete">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,9 +19,11 @@
                     <td>{{item.categoryName}}</td>
                     <td>{{item.description}}</td>
                     <td>{{item.createdOn | date : "dd-MMM-yyy"}}</td>
+                    <td>{{item.level}}</td>
+                    <td>{{item.parentCategoryName}}</td>
                     <td>
-                        <button (click)="editCategory(item.id)">Edit</button>
-                        <button (click)="deleteCategory(item.id, item.createdBy)">Delete</button>
+                        <button *ngIf="allowedActions?.isEdit" (click)="editCategory(item.id)">Edit</button>
+                        <button *ngIf="allowedActions?.isDelete" (click)="deleteCategory(item.id, item.createdBy)">Delete</button>
                     </td>
                 </tr>
             </tbody>

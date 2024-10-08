@@ -3,8 +3,7 @@
         <!-- progressbar -->
         <ul class="progressbar">
             <li class="active">Step 1<br>User Details</li>
-            <li id="step2">Step 2<br>Address Details</li>
-            <li id="step3">Step 3<br>Document Upload</li>
+            <li id="step2">Step 2<br>Document Upload</li>
         </ul>
         <div class="clr"></div>
         <!-- progressbar -->
@@ -19,50 +18,52 @@
                 <form [formGroup]="userDetails">
                     <div class="row">
                         <div class="inputBlock col-sm-6">
-                            <input formControlName="name" type="text" placeholder="Name" />
+                            <input formControlName="name" type="text" placeholder="Name"
+                                (keyup)="valueCheck('name',$event)" />
                             <span class="errorText"
                                 *ngIf="this.userDetails.controls.name.errors!=null && submitted">Please
                                 enter user name</span>
                         </div>
                         <div class="inputBlock col-sm-6">
-                            <input formControlName="pan" type="text" placeholder="PAN" />
+                            <input formControlName="pan" type="text" placeholder="PAN" (blur)="valueCheckOnBlur('pan')"
+                                (keyup)="valueCheck('pan',$event)" />
                             <span class="errorText"
-                                *ngIf="this.userDetails.controls.pan.errors!=null && submitted">Please
-                                enter
-                                PAN</span>
+                                *ngIf="this.userDetails.controls.pan.errors!=null && submitted || this.userDetails.controls.pan.errors!=null && panInv">Please enter PAN</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="inputBlock col-sm-6">
-                            <input formControlName="mobile" type="text" placeholder="Mobile" />
+                            <input formControlName="mobile" type="text" placeholder="Mobile"
+                                (blur)="valueCheckOnBlur('mobile')" (keyup)="valueCheck('mobile',$event)" />
                             <span class="errorText"
-                                *ngIf="this.userDetails.controls.mobile.errors!=null && submitted">Please
+                                *ngIf="this.userDetails.controls.mobile.errors!=null && submitted || this.userDetails.controls.mobile.errors!=null && mobileInv">Please
                                 enter Mobile</span>
                         </div>
                         <div class="inputBlock col-sm-6">
-                            <input formControlName="alternateMobile" type="text" placeholder="Alternate Mobile" />
+                            <input formControlName="alternateMobile" type="text" placeholder="Alternate Mobile"
+                                (keyup)="valueCheck('mobile',$event)" />
                         </div>
                     </div>
                     <div class="row">
                         <div class="inputBlock col-sm-6">
-                            <input formControlName="email" type="text" placeholder="Email" />
+                            <input formControlName="email" type="text" placeholder="Email" (blur)="valueCheckOnBlur('email')" (keyup)="valueCheck('email',$event)"/>
                             <span class="errorText"
-                                *ngIf="this.userDetails.controls.email.errors!=null && submitted">Please
+                                *ngIf="this.userDetails.controls.email.errors!=null && submitted || this.userDetails.controls.email.errors!=null && emailInv">Please
                                 enter Email</span>
                         </div>
                         <div class="inputBlock col-sm-6">
-                            <input formControlName="alternateEmail" type="text" placeholder="Alternate Email" />
+                            <input formControlName="alternateEmail" type="text" placeholder="Alternate Email" (keyup)="valueCheck('email',$event)"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="inputBlock col-sm-6">
-                            <input formControlName="p_address" type="text" placeholder="Permanent Address" />
+                            <input formControlName="p_address" type="text" placeholder="Permanent Address" (keyup)="valueCheck('address',$event)"/>
                             <span class="errorText"
                                 *ngIf="this.userDetails.controls.p_address.errors!=null && submitted">Please
                                 enter Permanent <Address></Address></span>
                         </div>
                         <div class="inputBlock col-sm-6">
-                            <input formControlName="c_address" type="text" placeholder="Mailing Address" />
+                            <input formControlName="c_address" type="text" placeholder="Mailing Address" (keyup)="valueCheck('address',$event)"/>
                             <span class="errorText"
                                 *ngIf="this.userDetails.controls.c_address.errors!=null && submitted">Please
                                 enter Mailing Address</span>
@@ -90,8 +91,7 @@
                     </div>
                     <div class="inputBlock col-sm-6">
                         <label for="fileInput">Select JPG and PDF files:</label>
-                        <input type="file" id="fileInput" (change)="onFileSelected($event)"
-                            accept=".jpg,.jpeg,.pdf">
+                        <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".jpg,.jpeg,.pdf">
                     </div>
                     <div class="buttonBlock">
                         <!-- <button (click)="onBackClick()">Back</button> -->

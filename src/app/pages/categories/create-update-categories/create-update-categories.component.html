@@ -13,31 +13,26 @@
                                 <input formControlName="categoryName" type="text" placeholder="Category Name" />
                                 <span class="errorText"
                                     *ngIf="this.createCategories.controls.categoryName.errors!=null && submitted">Please
-                                    enter user
-                                    name</span>
+                                    enter valid Category Name</span>
                             </div>
                             <div class="inputBlock col-sm-6">
                                 <input formControlName="description" type="text" placeholder="Description" />
                                 <span class="errorText"
                                     *ngIf="this.createCategories.controls.description.errors!=null && submitted">Please
-                                    enter
-                                    password</span>
+                                    enter valid Description</span>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="inputBlock col-sm-6">
-                                <input formControlName="level" type="text" placeholder="Level" />
-                                <span class="errorText"
-                                    *ngIf="this.createCategories.controls.level.errors!=null && submitted">Please
-                                    enter user
-                                    name</span>
-                            </div>
-                            <div class="inputBlock col-sm-6">
-                                <input formControlName="parentLevel" type="text" placeholder="Parent Level" />
-                                <span class="errorText"
-                                    *ngIf="this.createCategories.controls.parentLevel.errors!=null && submitted">Please
-                                    enter
-                                    password</span>
+                            <label><input type="checkbox" [checked]="checked" (change)="categorySelected()" />Is
+                                Category</label>
+                            <div *ngIf="isCategorySelected">
+                                <label for="dropdown">Parent:</label>
+                                <select id="dropdown" formControlName="parentLevel">
+                                    <option value="" disabled selected>Select</option>
+                                    <option *ngFor="let option of categoriesList" [value]="option.parentLevel">
+                                        {{ option.categoryName }}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                         <div class="buttonBlock">

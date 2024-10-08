@@ -4,6 +4,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { Categories } from 'src/app/models/categories.model';
 import { Router } from '@angular/router';
 import { CategoriesBean } from 'src/app/models/categoriesBean';
+import { Base64encodeService } from 'src/app/services/base64encode.service';
 
 @Component({
   selector: 'app-create-update-categories',
@@ -17,12 +18,15 @@ export class CreateUpdateCategoriesComponent implements OnInit {
   id: any;
   editEnable = false;
   categoryReq: CategoriesBean = new CategoriesBean();
-
-  constructor(private fb: FormBuilder, private masterService: MasterService, private route: Router) {
+  isCategorySelected: any = false;
+  onChange = (value: any) => { };
+  checked: boolean = false;
+  categoriesList: any = [];
+  constructor(private fb: FormBuilder, private masterService: MasterService, private route: Router, private base64encode: Base64encodeService) {
     this.createCategories = this.fb.group({
       categoryName: ["", [Validators.required]],
       description: ["", [Validators.required]],
-      level: ["", [Validators.required]],
+      // level: ["", [Validators.required]],
       parentLevel: ["", [Validators.required]]
     })
 
@@ -39,10 +43,13 @@ export class CreateUpdateCategoriesComponent implements OnInit {
   }
 
   categoryList() {
-    this.masterService.viewCategories(this.id).subscribe((res: any) => {
+    this.masterService.viewCategories(this.base64encode.encodeBase64(this.id)).subscribe((res: any) => {
       console.log(res);
       if (res != null) {
         this.categoryReq = res[0];
+        if(this.categoryReq.parentLevel != 0){
+          this.categorySelected();
+        }
         this.createCategories.patchValue(res[0]);
       } else {
 
@@ -61,13 +68,18 @@ export class CreateUpdateCategoriesComponent implements OnInit {
     }
     this.categoryReq = this.createCategories.value;
     this.categoryReq.CreatedBy = 'samrutti@gmail.com'
-    console.log(this.categoryReq);
+    if (this.isCategorySelected == false) {
+      this.categoryReq.Level = 1;
+      this.categoryReq.parentLevel = 0;
+    } else if (this.isCategorySelected == true) {
+      this.categoryReq.Level = 1;
+      this.categoryReq.parentLevel = +this.createCategories.controls.parentLevel.value;
+    }
     this.masterService.addCategories(this.categoryReq).subscribe((res: any) => {
-      console.log(res);
       if (res == '1') {
         this.route.navigateByUrl('/Category');
       } else {
-        console.log("failure -1 ---------------------------")
+        console.log("failure -1 ----- ----------------------")
       }
     })
   }
@@ -77,17 +89,46 @@ export class CreateUpdateCategoriesComponent implements OnInit {
     if (this.createCategories.invalid) {
       return;
     }
-    
+
     this.categoryReq.CategoryName = this.createCategories.value.categoryName;
     this.categoryReq.Description = this.createCategories.value.description;
     this.categoryReq.Level = this.createCategories.value.level;
-    this.categoryReq.ParentLevel = this.createCategories.value.parentLevel;
+    this.categoryReq.parentLevel = this.createCategories.value.parentLevel;
     this.masterService.editCategories(this.categoryReq).subscribe((res: any) => {
       console.log(res);
       if (res == '1') {
         this.route.navigateByUrl('/Category');
       } else {
         console.log("failure -1 ---------------------------")
+      }
+    })
+  }
+
+  categorySelected() {
+    this.checked = !this.checked;
+    this.onChange(this.checked);
+    if (this.checked) {
+      this.isCategorySelected = true;
+      this.callCategoryList();
+    } else {
+      this.isCategorySelected = false;
+    }
+  }
+
+  callCategoryList() {
+    this.masterService.viewCategories().subscribe((res: any) => {
+      console.log(res);
+      if (res != null) {
+        console.log("---------before----------", res);
+        res.forEach((element: { level: number; }) => {
+          if (element.level == 1) {
+            this.categoriesList.push(element);
+          }
+        });
+        console.log("-------------------", this.categoriesList);
+        // this.categoriesList = res;
+      } else {
+
       }
     })
   }

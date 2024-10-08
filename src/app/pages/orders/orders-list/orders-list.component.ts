@@ -10,7 +10,11 @@ import { Router } from '@angular/router';
 })
 export class OrdersListComponent implements OnInit {
   ordersList: any = [];
+  allowedActions : any = {};
   constructor(private fb: FormBuilder, private masterService: MasterService, private route: Router) {
+    this.allowedActions = sessionStorage.getItem('allowedPermission');
+    this.allowedActions = JSON.parse(this.allowedActions);
+    console.log("-----------------------allowedActions--------------",this.allowedActions)
   }
 
   ngOnInit(): void {

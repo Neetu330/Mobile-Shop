@@ -10,8 +10,9 @@
                     <ul>
                         <li class="login-customer d-lg-none d-md-block"><span> Welcome, {{userName}}</span><a
                                 class="closeNav" (click)="Closesidebar()"><i class="fa fa-times"></i></a></li>
-                        <li *ngFor="let item of updatedMenuList"><a *ngIf="item.isRequired" [routerLink]="item.link"
-                                [routerLinkActive]="['is-active']" [class.active]="item.active">{{item.label}}</a></li>
+                        <li *ngFor="let item of updatedMenuList">
+                            <a *ngIf="item.isRequired" [routerLink]="item.link"
+                                [routerLinkActive]="['is-active']" [class.active]="item.active" (click)="setActive(item,$event)">{{item.label}}</a></li>
                         <li (click)="Closesidebar()" class="login-customer last-li">
                             <span class="d-none  d-lg-inline-block"> Welcome, {{userName}}</span>
                             <a href="javascript:;" (click)="logout()">logout <i class="fa fa-power-off"

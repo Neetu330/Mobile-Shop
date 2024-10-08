@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       if (response.message == "Success") {
         sessionStorage.setItem('LoggedInStatus', "true");
         sessionStorage.setItem('userId', response.userId);
-        this.masterService.menuList = response.menu;
+        sessionStorage.setItem('menuList',JSON.stringify(response.menu));
         this.masterService.loggedInUserName = response.userName;
         if (response.menu.length > 0) {
           this.route.navigate([response.menu[0].name]); // Redirect to the first allowed menu
@@ -60,7 +60,12 @@ export class LoginComponent implements OnInit {
           this.route.navigate(['/not-allowed']); // Handle no allowed menus case
         }
       } else {
-
+        this.dialog.open(AlertComponent, {
+          data: {
+            message: "Login Failed"
+          }
+        });
+        return;
       }
     }, error => {
       this.dialog.open(AlertComponent, {

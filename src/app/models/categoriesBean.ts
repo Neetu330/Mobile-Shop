@@ -3,7 +3,7 @@ export class CategoriesBean {
     CategoryName: string | undefined; 
     Description: string | undefined;
     Level: number | undefined;
-    ParentLevel: number | undefined; 
+    parentLevel: number | undefined; 
     CreatedBy: string | undefined;
 }
 

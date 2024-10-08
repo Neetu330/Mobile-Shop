@@ -4,6 +4,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { Categories } from 'src/app/models/categories.model';
 import { Router } from '@angular/router';
 import { InventoriesBean } from 'src/app/models/categoriesBean';
+import { Base64encodeService } from 'src/app/services/base64encode.service';
 
 @Component({
   selector: 'app-create-update-inventories',
@@ -17,8 +18,9 @@ export class CreateUpdateInventoriesComponent implements OnInit {
   id: any;
   editEnable = false;
   inventoriesReq: InventoriesBean = new InventoriesBean();
+  categoriesList: any;
 
-  constructor(private fb: FormBuilder, private masterService: MasterService, private route: Router) {
+  constructor(private fb: FormBuilder, private masterService: MasterService, private route: Router,private base64encode: Base64encodeService) {
     this.createInventories = this.fb.group({
       categoryName: ["", [Validators.required]],
       productName: ["", [Validators.required]],
@@ -34,14 +36,27 @@ export class CreateUpdateInventoriesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     if (this.id != null || this.id != undefined) {
       this.editEnable = true;
-      this.categoryList();
+      this.inventoryList();
     }
   }
 
-  categoryList() {
-    this.masterService.viewInventories(this.id).subscribe((res: any) => {
+  callCategoryList() {
+    this.masterService.viewCategories().subscribe((res: any) => {
+      console.log(res);
+      if (res != null) {
+        this.categoriesList = res;
+        console.log("-------------------", this.categoriesList);
+      } else {
+
+      }
+    })
+  }
+
+  inventoryList() {
+    this.masterService.viewInventories(this.base64encode.encodeBase64(this.id)).subscribe((res: any) => {
       console.log(res);
       if (res != null) {
         this.inventoriesReq = res[0];

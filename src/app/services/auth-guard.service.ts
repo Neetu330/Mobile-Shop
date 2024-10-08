@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CanActivate ,ActivatedRouteSnapshot, RouterStateSnapshot,Router} from '@angular/router';
 import { MasterService } from './master.service';
+import { Base64encodeService } from 'src/app/services/base64encode.service';
 @Injectable()
 export class AuthGuard implements CanActivate {
+  status: boolean | undefined;
 
-  constructor( private router:Router, private masterService : MasterService) { 
-    this.handlePageRefresh();
+  constructor( private router:Router, private masterService : MasterService,private base64encode: Base64encodeService) { 
+    // this.handlePageRefresh();
   }
 
   handlePageRefresh(): void {
@@ -23,11 +25,25 @@ export class AuthGuard implements CanActivate {
   }
   
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if(this.isLoggedIn()){
+    if(this.checkPermission(next.routeConfig?.path)){
       return true;
     }
-    this.router.navigateByUrl('/login');
+    // this.router.navigateByUrl('/login');
     return false;
+  }
+
+  checkPermission(path: any): boolean{
+    this.status = false;
+    let userId = sessionStorage.getItem('userId');
+    this.masterService.checkPermission(this.base64encode.encodeBase64(userId),this.base64encode.encodeBase64(path)).subscribe((res: any) => {
+      if(res.message == "Success"){
+        this.status = true;
+        sessionStorage.setItem('allowedPermission',JSON.stringify(res));
+      }else{
+        this.status = false;
+      }
+    })
+    return true;
   }
 
   isLoggedIn() : boolean{

@@ -10,30 +10,37 @@
                     <form [formGroup]="createInventories">
                         <div class="row">
                             <div class="inputBlock col-sm-6">
-                                <input formControlName="categoryName" type="text" placeholder="Category Name" />
+                                <label for="dropdown">Category Name:</label>
+                                <select id="dropdown" formControlName="categoryName">
+                                    <option value="" disabled selected>Select</option>
+                                    <option *ngFor="let option of categoriesList" [value]="option.parentLevel">
+                                        {{ option.categoryName }}
+                                    </option>
+                                </select>
                                 <span class="errorText"
                                     *ngIf="this.createInventories.controls.categoryName.errors!=null && submitted">Please
-                                    enter user
-                                    name</span>
+                                    select Category name</span>
                             </div>
                             <div class="inputBlock col-sm-6">
                                 <input formControlName="productName" type="text" placeholder="Product Name" />
                                 <span class="errorText"
-                                    *ngIf="this.createInventories.controls.productName.errors!=null && submitted">Please enter Product Name</span>
+                                    *ngIf="this.createInventories.controls.productName.errors!=null && submitted">Please
+                                    enter Product Name</span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="inputBlock col-sm-6">
                                 <input formControlName="description" type="text" placeholder="Description" />
                                 <span class="errorText"
-                                    *ngIf="this.createInventories.controls.description.errors!=null && submitted">Please enter description</span>
+                                    *ngIf="this.createInventories.controls.description.errors!=null && submitted">Please
+                                    enter description</span>
                             </div>
                             <div class="inputBlock col-sm-6">
                                 <input formControlName="price" type="text" placeholder="Price" />
                                 <span class="errorText"
                                     *ngIf="this.createInventories.controls.price.errors!=null && submitted">Please
                                     enter
-                                    password</span>
+                                    price</span>
                             </div>
                         </div>
                         <div class="row">
@@ -41,15 +48,13 @@
                                 <input formControlName="quantity" type="text" placeholder="Quantity" />
                                 <span class="errorText"
                                     *ngIf="this.createInventories.controls.quantity.errors!=null && submitted">Please
-                                    enter user
-                                    name</span>
+                                    enter Quantity</span>
                             </div>
                             <div class="inputBlock col-sm-6">
                                 <input formControlName="sku" type="text" placeholder="SKU" />
                                 <span class="errorText"
                                     *ngIf="this.createInventories.controls.sku.errors!=null && submitted">Please
-                                    enter
-                                    password</span>
+                                    enter SKU</span>
                             </div>
                         </div>
                         <div class="buttonBlock">

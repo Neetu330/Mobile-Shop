@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MasterService } from 'src/app/services/master.service';
 import { Router } from '@angular/router';
+import { Base64encodeService } from 'src/app/services/base64encode.service';
 
 @Component({
   selector: 'app-inventories-list',
@@ -11,19 +12,17 @@ import { Router } from '@angular/router';
 export class InventoriesListComponent implements OnInit {
   inventoriesList: any = [];
   allowedActions : any = [];
-  constructor(private fb: FormBuilder, private masterService: MasterService, private route: Router) {
-
+  constructor(private fb: FormBuilder, private masterService: MasterService, private route: Router,private base64encode: Base64encodeService) {
+    this.allowedActions = sessionStorage.getItem('allowedPermission');
+    this.allowedActions = JSON.parse(this.allowedActions);
+    console.log("-----------------------allowedActions--------------",this.allowedActions)
   }
 
   ngOnInit(): void {
-    let userId = sessionStorage.getItem('userId');
-    this.masterService.checkPermission(userId,'inventories').subscribe((res: any) => {
-      this.allowedActions = res;
-    })
-    this.categoryList();
+    this.inventoryList();
   }
 
-  categoryList() {
+  inventoryList() {
     this.masterService.viewInventories().subscribe((res: any) => {
       console.log(res);
       if (res != null) {
@@ -43,8 +42,7 @@ export class InventoriesListComponent implements OnInit {
   }
 
   delete(id: any, username: any) {
-    debugger;
-    this.masterService.deleteInventories(id, username).subscribe((res: any) => {
+    this.masterService.deleteInventories(this.base64encode.encodeBase64(id), this.base64encode.encodeBase64(username)).subscribe((res: any) => {
     })
   }
 
