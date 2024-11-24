@@ -7,129 +7,52 @@ import { MasterService } from 'src/app/services/master.service';
 })
 export class DashboardComponent implements OnInit {
   menuList = [];
+  customeremiremider: any = [];
+  boxData: any = {};
+  earningData: any = {};
+  bestproduct: any = [];
+  constructor(private masterService: MasterService) {
 
-  constructor(private masterService : MasterService) { 
-    
   }
 
   ngOnInit(): void {
-    
-    // this.masterService.viewAllOrders().subscribe((res: any)=>{
-    //   console.log(res);
-    //   if(res.length != 0){
-        
-    //   }else{
-    //     console.log("----------------else")
-    //   }
-    // })
-  
+    this.getUpcomingEMIs();
+    this.getBoxesData();
+    this.getTopSellingProducts();
   }
 
-  customeremiremider: any = [
-    {
-      name: 'Rohit shetty',
-      dtemi: '02/01/2025',
-      product: "Vivo T90",
-      emiamount: "5,500",
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'Rohit shetty',
-      dtemi: '02/01/2025',
-      product: "Vivo T90",
-      emiamount: "5,500",
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'Rohit shetty',
-      dtemi: '02/01/2025',
-      product: "Vivo T90",
-      emiamount: "5,500",
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'Rohit shetty',
-      dtemi: '02/01/2025',
-      product: "Vivo T90",
-      emiamount: "5,500",
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'Rohit shetty',
-      dtemi: '02/01/2025',
-      product: "Vivo T90",
-      emiamount: "5,500",
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'Rohit shetty',
-      dtemi: '02/01/2025',
-      product: "Vivo T90",
-      emiamount: "5,500",
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'Rohit shetty',
-      dtemi: '02/01/2025',
-      product: "Vivo T90",
-      emiamount: "5,500",
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'Rohit shetty',
-      dtemi: '02/01/2025',
-      product: "Vivo T90",
-      emiamount: "5,500",
-      description: 'This is the best product ever!'
-    },
+  getBoxesData() {
+    this.masterService.GetBoxesData().subscribe((res: any) => {
+      if (res.hasOwnProperty('happyCustomers')) {
+        delete res['happyCustomers'];
+      }
 
-  ];
+      for (const key in res) {
+        if (res.hasOwnProperty(key)) {
+          const capitalizedKey = key.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase());
+          if (key.toLowerCase().includes("earning")) {
+            this.earningData[capitalizedKey] = res[key];
+          } else {
+            this.boxData[capitalizedKey] = res[key];
+          }
+        }
+      }
+      
+    });
+  }
 
-  bestproduct: any = [
-    {
-      name: 'bestproduct',
-      image: 'https://via.placeholder.com/150',
-      price: 500,
-      qty: 10,
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'bestproduct',
-      image: 'https://via.placeholder.com/150',
-      price: 500,
-      qty: 10,
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'bestproduct',
-      image: 'https://via.placeholder.com/150',
-      price: 500,
-      qty: 10,
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'bestproduct',
-      image: 'https://via.placeholder.com/150',
-      price: 500,
-      qty: 10,
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'bestproduct',
-      image: 'https://via.placeholder.com/150',
-      price: 500,
-      qty: 10,
-      description: 'This is the best product ever!'
-    },
-    {
-      name: 'bestproduct',
-      image: 'https://via.placeholder.com/150',
-      price: 500,
-      qty: 10,
-      description: 'This is the best product ever!'
-    },
+  getUpcomingEMIs() {
+    this.masterService.GetUpcomingEMIs().subscribe((res: any) => {
+      this.customeremiremider = res;
+    });
+  }
 
-  ];
+  getTopSellingProducts() {
+    this.masterService.GetTopSellingProducts().subscribe((res: any) => {
+      this.bestproduct = res;
+    });
+  }
+
   bestoffer: any = [
     {
       name: 'bestoffer',
@@ -137,55 +60,55 @@ export class DashboardComponent implements OnInit {
       dtstart: "12/12/2024",
       dtend: "31/12/2024",
       description: 'This is the best offer ever!'
-    },{
+    }, {
       name: 'bestoffer',
       image: 'https://via.placeholder.com/150',
       dtstart: "12/12/2024",
       dtend: "31/12/2024",
       description: 'This is the best offer ever!'
-    },{
+    }, {
       name: 'bestoffer',
       image: 'https://via.placeholder.com/150',
       dtstart: "12/12/2024",
       dtend: "31/12/2024",
       description: 'This is the best offer ever!'
-    },{
+    }, {
       name: 'bestoffer',
       image: 'https://via.placeholder.com/150',
       dtstart: "12/12/2024",
       dtend: "31/12/2024",
       description: 'This is the best offer ever!'
-    },{
+    }, {
       name: 'bestoffer',
       image: 'https://via.placeholder.com/150',
       dtstart: "12/12/2024",
       dtend: "31/12/2024",
       description: 'This is the best offer ever!'
-    },{
+    }, {
       name: 'bestoffer',
       image: 'https://via.placeholder.com/150',
       dtstart: "12/12/2024",
       dtend: "31/12/2024",
       description: 'This is the best offer ever!'
-    },{
+    }, {
       name: 'bestoffer',
       image: 'https://via.placeholder.com/150',
       dtstart: "12/12/2024",
       dtend: "31/12/2024",
       description: 'This is the best offer ever!'
-    },{
+    }, {
       name: 'bestoffer',
       image: 'https://via.placeholder.com/150',
       dtstart: "12/12/2024",
       dtend: "31/12/2024",
       description: 'This is the best offer ever!'
-    },{
+    }, {
       name: 'bestoffer',
       image: 'https://via.placeholder.com/150',
       dtstart: "12/12/2024",
       dtend: "31/12/2024",
       description: 'This is the best offer ever!'
-    },{
+    }, {
       name: 'bestoffer',
       image: 'https://via.placeholder.com/150',
       dtstart: "12/12/2024",
@@ -193,9 +116,5 @@ export class DashboardComponent implements OnInit {
       description: 'This is the best offer ever!'
     }
   ];
-
-
-
-
 
 }

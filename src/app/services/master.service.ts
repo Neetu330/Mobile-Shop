@@ -17,6 +17,7 @@ export class MasterService {
   categoriesApiApplicationURL = environment.webapibaseURL + 'Master/';
   inventoriesApiApplicationURL = environment.webapibaseURL + 'Inventories/';
   usersApiApplicationURL = environment.webapibaseURL + 'Users/';
+  dahboardURL = environment.webapibaseURL + 'Dashboard/';
 
   public categoryBean: CategoriesBean = new CategoriesBean();
   public categoryValue: BehaviorSubject<CategoriesBean> = new BehaviorSubject<CategoriesBean>(this.categoryBean);
@@ -131,4 +132,25 @@ export class MasterService {
     return this.http.get(this.apiURL);
   }
 
+
+  // dashboard API call
+  GetBoxesData(){
+    this.apiURL = this.dahboardURL + 'GetBoxesData';
+    return this.http.get(this.apiURL);
+  }
+
+  GetUpcomingEMIs(){
+    this.apiURL = this.dahboardURL + 'GetUpcomingEMIs';
+    return this.http.get(this.apiURL);
+  }
+
+  GetTopSellingProducts(){
+    this.apiURL = this.dahboardURL + 'GetTopSellingProducts';
+    return this.http.get(this.apiURL);
+  }
+
+  GetTopSellingEmployees(){
+    this.apiURL = this.dahboardURL + 'GetTopSellingEmployees';
+    return this.http.get(this.apiURL);
+  }
 }
