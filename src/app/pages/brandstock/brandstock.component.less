@@ -1,0 +1,174 @@
+section.customer-data {
+  padding: 30px 30px 30px 30px;
+  border: thin solid #ddd;
+  width: 100%;
+  margin-bottom: 30px;
+  margin-top: 40px;
+  background: #fbfbfb;
+  border-radius: 5px;
+  box-shadow: 8px 8px 0px #00000017;
+}
+
+button.btn.btn-primary.save-btn {
+  
+  padding: 7px 14px;
+  background: #0c9aa9;
+  border-radius: 45px;
+  font-size: 13px;
+  font-weight: 100 !important;
+  transition: all 0.3s;
+
+  &:hover {
+    background: #333333;
+    color: #ffffff;
+  }
+}
+
+.dashboardHeading {
+  font-size: 25px;
+  overflow: hidden;
+  padding: 0px 0px 10px 0;
+  margin: 0;
+  color: #0c9aa9;
+  text-shadow: 2px 2px #ececec;
+}
+
+.customerContainerHead {
+  overflow: hidden;
+  position: relative;
+  border-bottom: thin solid #ddd;
+  margin-bottom: 20px;
+  padding: 5px 15px;
+}
+
+.new-entry .btn.btn-primary {
+  margin-top: 30px;
+}
+
+button.btn.btn-add {
+  padding: 5px 14px;
+  border-radius: 15px;
+  font-size: 12px;
+  background: #efbb00;
+  font-weight: 100 !important;
+}
+
+input[type="file"] {
+  font-size: 12px;
+}
+
+.barcodeScan {
+  button {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    bottom: 6px;
+    height: 27px;
+    font-size: 12px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background: #0c9aa9;
+    transition: all 0.3s;
+
+    &:hover {
+      background: #333333;
+      color: #ffffff;
+    }
+  }
+
+  input {
+    padding-right: 70px;
+  }
+}
+
+.brands-tab-content,
+.stock-tab-content {
+  display: none;
+}
+
+.brands-tab-content.active,
+.stock-tab-content.active {
+  display: block;
+}
+
+
+.changes-date {
+  position: absolute;
+  right: 0;
+  top: -50px;
+}
+
+li.stock-tab,
+li.brands-tab {
+  display: inline-block;
+  padding: 10px 15px;
+  border: thin solid #ddd;
+  border-radius: 5px 6px 0px 0px;
+  border-bottom: none;
+  margin-right: 8px;
+  transition: all 0.5s;
+  top: 1px;
+  opacity: 0.5;
+  position: relative;
+  cursor: pointer;
+  z-index: 0;
+}
+
+li.stock-tab.active,
+li.brands-tab.active {
+  position: relative;
+  top: 0px;
+  background: #0c9aa9;
+  color: #fff;
+  opacity: 1;
+}
+
+.tabs-content {
+  position: relative;
+  background: #fff;
+  padding: 15px 15px 0px 15px;
+  border: thin solid #ddd;
+}
+
+ul.tabsstock {
+  padding: 0 0;
+  margin: 0;
+}
+
+.brandstocklist .new-entry {
+  margin-bottom: 40px;
+}
+
+li.stock-tab:hover,
+li.brands-tab:hover {
+  opacity: 1;
+}
+
+table.stocktable.table tr td,
+table.stocktable.table tr th {
+  border-left: thin solid #ddd;
+  font-size: 14px;
+}
+
+table.stocktable.table tr:last-child td {
+  border-bottom: thin solid #ddd;
+
+}
+
+table.stocktable.table tr td:last-child,
+table.stocktable.table tr th:last-child {
+  border-right: thin solid #ddd;
+}
+
+table.stocktable.table tr th {
+  background: #0c9aa9;
+  color: #fff;
+  font-weight: normal;
+}
+
+input[type=date] {
+  text-transform: uppercase !important;
+  font-size: 14px;
+}
