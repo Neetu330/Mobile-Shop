@@ -1,7 +1,11 @@
 @import "~font-awesome/css/font-awesome.css";
-body, html, *{
+
+body,
+html,
+* {
     font-family: "Poppins", sans-serif;
 }
+
 .btn.btn-primary {
     background: #085ad2;
     border: thin solid #085ad2;
@@ -10,8 +14,38 @@ body, html, *{
     font-size: 13px;
     transition: all 0.3s;
 }
-.btn.btn-primary:hover {
-    background: #fda820;
-    border: thin solid #fda820;
 
+.btn.btn-primary:hover {
+    background: #333333;
+    border: thin solid #333333;
+}
+
+table.table.table-hover tr th {
+    font-weight: 600;
+    color: #085ad2;
+}
+
+table.table.table-hover tr>* {
+    background: none;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600
+}
+
+section.customer-data{
+    padding: 30px 30px 30px 30px;
+    border: thin solid #dccfff;
+    width: 95%;
+    margin: 40px auto;
+    background: #f9f9ff;
+    border-radius: 5px;
+    box-shadow: 8px 8px 9px #00000014;
 }
