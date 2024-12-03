@@ -51,6 +51,11 @@ export class CustomerdetailsComponent implements OnInit {
     
   ]
 
+  confimModal() {
+    const delmodal = document.getElementById('confimationPopup');
+    delmodal?.classList.add('show');
+    delmodal?.setAttribute('style', 'display: block;');
+  }
   showModal() {
     const modal = document.getElementById('NewTransaction');
     modal?.classList.add('show');
@@ -59,9 +64,14 @@ export class CustomerdetailsComponent implements OnInit {
 
   closeModal() {
     const modal = document.getElementById('NewTransaction');
-    modal?.classList.remove('show');
-    modal?.setAttribute('style', 'display: none;');
+    const delmodal = document.getElementById('confimationPopup');
+    
+  modal?.classList.remove('show');
+  modal?.setAttribute('style', 'display: none;');
+  delmodal?.classList.remove('flow');
+  delmodal?.setAttribute('style', 'display: none;');
   }
+
   constructor() { }
 
   ngOnInit(): void {

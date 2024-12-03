@@ -9,12 +9,15 @@
                 <div class="form-group mb-4 col-md-3"><label>Brand</label>
                     <select class="form-select">
                        <option *ngFor="let brand of brands">
-                        {{brand.id}} {{brand.value}}  {{brand.status}} 
+                        {{brand.value}}
                        </option>
                       </select>
                 </div>
                 <div class="form-group mb-4 col-md-3"><label>Model No</label>
                     <input type="text"  name="model No" id="" class="form-control">
+                </div>
+                <div class="form-group mb-4 col-md-3"><label>Storage/RAM</label>
+                    <input type="text"  name="color" placeholder="128/4" id="" class="form-control">
                 </div>
                 <div class="form-group mb-4 col-md-3"><label>Color</label>
                     <input type="text"  name="color" id="" class="form-control">
@@ -29,17 +32,17 @@
                        <input type="date"  class="form-control" id="myDate"  name="date">
                 </div>
                 <div class="form-group col-md-3 barcodeScan">
-                    <!-- <button><i class="fa fa-qrcode" aria-hidden="true"></i> Scan</button> -->
+                    <button><i class="fa fa-qrcode" aria-hidden="true"></i> Scan</button>
                     <label>IMEI 1</label>
                     <input type="text" name="imei1" class="form-control">
                 </div>
                 <div class="form-group col-md-3 barcodeScan">
-                    <!-- <button><i class="fa fa-qrcode" aria-hidden="true"></i> Scan</button> -->
+                    <button><i class="fa fa-qrcode" aria-hidden="true"></i> Scan</button>
                     <label>IMEI 2</label>
                     <input type="text" name="imei2" id="" class="form-control">
                 </div>
 
-                <div class="form-group text-end col-md-3">
+                <div class="form-group text-end col-md-12">
                     <button  type="Sumbit" class="btn btn-primary save-btn"><i class="fa fa-plus"></i> Add Stock</button>
                 </div>
             </div>
@@ -48,9 +51,19 @@
     </section>
     <section class="customer-data">
         <div class="tabsStockNBrands">
-            <div class="w-100 customerContainerHead">
+            <div class="row">
+            <div class="customerContainerHead col-6">
                 <h3 class="dashboardHeading float-left">Stock Details</h3>
                 <!-- <button class="btn btn-add float-right"><i class="fa fa-plus"></i> Add</button> -->
+            </div>
+            <div class="col-6">
+                <ul class="stock-status-bar text-end">
+                    <li><span class="status-title">Yest Opening</span> <span class="status-count">300</span></li>
+                    <li><span class="status-title">Yest Purchase</span> <span class="status-count">300</span></li>
+                    <li><span class="status-title">Yest Sale</span> <span class="status-count">300</span></li>
+                    <li><span class="status-title">Today Closing</span> <span class="status-count">300</span></li>
+                </ul>
+            </div>
             </div>
 
             <table class="table table-hover">

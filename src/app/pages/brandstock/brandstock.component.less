@@ -22,6 +22,36 @@
   margin-top: 30px;
 }
 
+ul.stock-status-bar {
+  padding: 0;
+}
+
+ul.stock-status-bar li {
+  display: inline-block;
+}
+
+ul.stock-status-bar li span {
+  display: block;
+}
+
+ul.stock-status-bar li+li {
+  margin-left: 20px;
+  border-left: thin solid #ddd;
+  padding-left: 21px;
+}
+
+.stock-status-bar span.status-title {
+  color: #666;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.stock-status-bar span.status-count {
+  font-size: 20px;
+  font-weight: 600;
+  color: #085ad2;
+}
+
 button.btn.btn-add {
   padding: 5px 14px;
   border-radius: 15px;
@@ -35,18 +65,19 @@ input[type="file"] {
 }
 
 .barcodeScan {
+  position: relative;
   button {
     position: absolute;
-    right: 20px;
+    right: 17px;
     cursor: pointer;
-    bottom: 6px;
+    bottom: 14px;
     height: 27px;
     font-size: 12px;
     padding: 4px 10px;
     border: none;
     border-radius: 5px;
     color: #fff;
-    background: #0c9aa9;
+    background: #085ad2;
     transition: all 0.3s;
 
     &:hover {
@@ -114,9 +145,6 @@ ul.tabsstock {
   margin: 0;
 }
 
-.brandstocklist .new-entry {
-  margin-bottom: 40px;
-}
 
 li.stock-tab:hover,
 li.brands-tab:hover {

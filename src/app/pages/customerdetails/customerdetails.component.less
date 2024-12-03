@@ -58,7 +58,7 @@ button.btn.btn-primary.save-btn {
   padding: 25px 15px;
   margin-top: 20px;
 
-  .btn {
+  .btn+.btn {
     margin-left: 10px;
   }
 }
@@ -138,9 +138,43 @@ input[type="file"] {
   font-size: 12px;
 }
 
+div#confimationPopup {
+  background: #000000bd;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+div#confimationPopup .modalpopup-content {
+  background: #fff;
+  border-radius: 6px;
+  display: table;
+  min-width: 440px;
+  margin: 100px auto 0 auto;
+}
+
+div#confimationPopup .modalpopup-content {
+  padding: 10px 0;
+  text-align: center;
+}
+
+div#confimationPopup .modalpopup-heading h4 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-family: "Italiana", sans-serif;
+  font-weight: 700;
+}
 
 
-.modalpopup-overlay {
+
+div#confimationPopup .btnBlock-customerDetails {margin: 0;}
+
+
+.modalpopup-overlay.TransactionPopup {
   position: fixed;
   z-index: 9999;
   background: #000000a6;
@@ -175,11 +209,18 @@ input[type="file"] {
   }
 
   span.modalpopup-times {
-    position: fixed;
+    position: absolute;
     right: 20px;
     background: #fff;
-    top: 8px;
+    top: 22px;
+    color: #373737;
     padding: 5px 10px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.5s;
+    &:hover{
+    opacity: 0.4;  
+    }
   }
 }
 

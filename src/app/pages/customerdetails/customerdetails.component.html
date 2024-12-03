@@ -7,9 +7,12 @@
           <section class="personal-container">
             <form>
               <div class="row">
-                <div  class="col-md-6"><h3>Personal Details</h3></div>
-                <div  class="col-md-6 text-end">
-                  <button routerLink="/customers" class="btn btn-primary update-btn"><i class="fa fa-undo"></i> Back to Customer List</button>
+                <div class="col-md-6">
+                  <h3>Personal Details</h3>
+                </div>
+                <div class="col-md-6 text-end">
+                  <button routerLink="/customers" class="btn btn-primary update-btn"><i class="fa fa-undo"></i> Back to
+                    Customer List</button>
                 </div>
                 <div class="form-group col-md-3">
                   <label>First Name</label>
@@ -59,7 +62,9 @@
 
           <section class="kyc-container">
             <div class="row">
-              <div class="col-md-12"><h3 >Upload New Documents</h3></div>
+              <div class="col-md-12">
+                <h3>Upload New Documents</h3>
+              </div>
               <div class="new-entry col-md-12">
                 <form>
                   <div class="row">
@@ -82,13 +87,15 @@
                   </div>
                 </form>
               </div>
-              <div class="col-md-12 mt-4 mb-2 kyc-docs"><h5>KYC Documents</h5></div>
+              <div class="col-md-12 mt-4 mb-2 kyc-docs">
+                <h5>KYC Documents</h5>
+              </div>
               <ul class="documents-Thumbs col-md-12">
                 <li *ngFor="let img of imageSrc">
                   <a href="" target="_blank"> <img [src]="img.src" alt=""></a>
                   <strong style="text-transform: uppercase;">{{img.value}}</strong>
                   <span>{{img.number}}</span>
-                  <a class="removeImg"><i class="fa fa-times"></i></a>
+                  <a class="removeImg" (click)="confimModal()"><i class="fa fa-times"></i></a>
                 </li>
               </ul>
             </div>
@@ -96,7 +103,8 @@
 
           <section class="friend-container">
             <div class="row">
-              <div class="col-md-12"><h3>Family & Friends Contact Details</h3>
+              <div class="col-md-12">
+                <h3>Family & Friends Contact Details</h3>
               </div>
               <div class="new-entry col-md-12">
                 <form>
@@ -180,8 +188,9 @@
 
           <section class="transaction-container">
 
-            <div class="col-md-12 heading-title"><h3>Transaction Details</h3> <button (click)="showModal()" class="btn btn-primary btn-add new-transaction"><i
-                  class="fa fa-plus"></i>Add</button>
+            <div class="col-md-12 heading-title">
+              <h3>Transaction Details</h3> <button (click)="showModal()"
+                class="btn btn-primary btn-add new-transaction"><i class="fa fa-plus"></i>Add</button>
             </div>
 
 
@@ -269,9 +278,22 @@
     </div>
   </div>
 </div>
-<div class="modalpopup-overlay TransactionPopup d-none" id="NewTransaction">
-  <span class="modalpopup-times" (click)="closeModal()"><i class="fa fa-times"></i></span>
+
+<div class="modalpopup-overlay confimationPopup danger" style="display: none;" id="confimationPopup">
   <div class="modalpopup-content">
+    <div class="modalpopup-heading">
+      <h4>Are you sure ?</h4>
+    </div>
+    <div class="btnBlock-customerDetails col-md-12">
+      <button (click)="closeModal()" class="btn btn-cancel">No</button>
+      <button class="btn btn-primary" (click)="closeModal()" type="Sumbit">Yes</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalpopup-overlay TransactionPopup" style="display: none;" id="NewTransaction">
+  <div class="modalpopup-content">
+    <span class="modalpopup-times" (click)="closeModal()"><i class="fa fa-times"></i></span>
     <div class="modalpopup-heading">
       <h4>Add New Transaction</h4>
     </div>
